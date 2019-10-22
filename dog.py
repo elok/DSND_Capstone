@@ -1,4 +1,3 @@
-import os
 import numpy as np
 from glob import glob
 import cv2
@@ -13,24 +12,11 @@ from tqdm import tqdm
 from keras.layers import Dropout
 from keras.applications.resnet50 import preprocess_input, decode_predictions
 
-
-
-
-from flask import Flask, render_template, request, redirect, flash, url_for
-from werkzeug.utils import secure_filename
-
 # load list of dog names
 dog_names = [item[20:-1] for item in sorted(glob("data/dog_images/train/*/"))]
 
 # define ResNet50 model
 ResNet50_model = ResNet50(weights='imagenet')
-
-inception_model = None
-
-UPLOAD_FOLDER = 'uploaded_images'
-ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
-app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 def path_to_tensor(img_path):
     # loads RGB image as PIL.Image.Image type
@@ -73,7 +59,7 @@ def show_img(img_path):
     return imgplot
 
 ### and returns the dog breed that is predicted by the model.
-def inception_predict_breed(img_path):
+def inception_predict_breed(img_path, inception_model):
     bottleneck_feature = extract_InceptionV3(path_to_tensor(img_path))     # extract bottleneck features
     predicted_vector = inception_model.predict(bottleneck_feature)       # obtain predicted vector
     return dog_names[np.argmax(predicted_vector)]                       # return dog breed that is predicted by the model
@@ -131,41 +117,10 @@ def setup_cnn():
     ### TODO: Load the model weights with the best validation loss.
     inception_model.load_weights('saved_models/weights.best.inception.hdf5')
 
-def allowed_file(filename):
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
-@app.route('/')
-@app.route('/index', methods=['GET', 'POST'])
-def index():
-    if request.method == 'POST':
-        # check if the post request has the file part
-        if 'fileToUpload' not in request.files:
-            flash('No file part')
-            return redirect(request.url)
-        file = request.files['fileToUpload']
-        # if user does not select file, browser also
-        # submit an empty part without filename
-        if file.filename == '':
-            flash('No selected file')
-            return redirect(request.url)
-        if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-
-            new_filename = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-            file.save(new_filename)
-
-            predicted_breed = inception_predict_breed(new_filename)
-
-            return redirect(url_for('index',
-                                    filename=new_filename,
-                                    breed=predicted_breed))
-
-    return render_template('index.html')
-
-def main():
-    setup_cnn()
-    app.run()
+    return inception_model
 
 if __name__ == '__main__':
-    main()
+    inception_model = setup_cnn()
+    filename = r'images/user_images_cat.jpg'
+    x = inception_predict_breed(filename, inception_model)
+    print(x)
