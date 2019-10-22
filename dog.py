@@ -164,7 +164,7 @@ def index():
     return render_template('index.html')
 
 def main():
-    # setup_cnn()
+    setup_cnn()
     app.run()
 
 if __name__ == '__main__':
