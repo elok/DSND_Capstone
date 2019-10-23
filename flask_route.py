@@ -21,6 +21,7 @@ def index():
     global cnn_model
 
     if request.method == 'POST':
+        print('POST')
         # check if the post request has the file part
         if 'fileToUpload' not in request.files:
             flash('No file part')
@@ -36,11 +37,14 @@ def index():
 
             new_filename = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             file.save(new_filename)
-            predicted_breed = inception_predict_breed(new_filename, cnn_model)
+            print(new_filename)
 
-            return redirect(url_for('index',
-                                    filename=new_filename,
-                                    breed=predicted_breed))
+            predicted_breed = inception_predict_breed(new_filename, cnn_model)
+            print(predicted_breed)
+
+            message = "Thank you for uploading file {}. Your predicted dog is {}.".format(filename, predicted_breed)
+            return render_template('index.html',
+                                    message=message)
 
     return render_template('index.html')
 
@@ -49,9 +53,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-# if __name__ == '__main__':
-#     inception_model = setup_cnn()
-#     filename = r'images/user_images_cat.jpg'
-#     x = inception_predict_breed(filename, inception_model)
-#     print(x)
