@@ -4,7 +4,7 @@ from werkzeug.utils import secure_filename
 from dog import inception_predict_breed, setup_cnn
 
 # Setup upload folder and file extensions
-UPLOAD_FOLDER = 'uploaded_images'
+UPLOAD_FOLDER = 'static'
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 
 # Setup flask application and attach the upload folder
@@ -57,7 +57,7 @@ def index():
             message = "Thank you for uploading file {}. Your predicted dog is {}.".format(filename, predicted_breed)
 
             # Render the HTML with the message
-            return render_template('index.html', message=message)
+            return render_template('index.html', message=message, filename=new_filename)
 
     # Render default html page
     return render_template('index.html')
