@@ -1,7 +1,54 @@
 # Udacity Data Scientist Nanodegree - Dog Breed Classifier
 
-## Project Overview
-This is the dog breed classifier project. This project uses Convolutional Neural Networks (CNNs). In this project, I built a pipeline to process real-world, user-supplied images. Given an image of a dog, the algorithm will identify an estimate of the canine’s breed. If supplied an image of a human, the code will identify the resembling dog breed.
+## Project Definition
+
+### Project Overview
+Student provides a high-level overview of the project. Background information such as the problem domain, the project origin, and related data sets or input data is provided.
+
+
+This is the dog breed classifier project. A Convolutional Neural Networks (CNN) is built and trained to determine the breed of the dog. The code will accept any user-supplied image as input. If a dog is detected in the image, it will provide an estimate of the dog's breed. If a human is detected, it will provide an estimate of the dog breed that is most resembling. 
+
+We will first create a CNN from scratch and see how that performs and then we'll take advantage of a technique called Transfer Learning.
+
+Neural network
+flask application
+
+
+
+--------------------------------------
+
+### Problem Statement
+The problem which needs to be solved is clearly defined. A strategy for solving the problem, including discussion of the expected solution, has been made.
+
+how classifier works
+
+In this project, I built a pipeline to process real-world, user-supplied images. Given an image of a dog, the algorithm will identify an estimate of the canine’s breed. If supplied an image of a human, the code will identify the resembling dog breed.
+
+how web app should work
+
+## Metrics
+Metrics used to measure performance of a model or result are clearly defined. Metrics are justified based on the characteristics of the problem.
+
+discuss training sets and results
+
+## Analysis
+
+### Data Exploration
+Features and calculated statistics relevant to the problem have been reported and discussed related to the dataset, and a thorough description of the input space or input data has been made. Abnormalities or characteristics about the data or input that need to be addressed have been identified.
+
+
+### Data Visualization
+Build data visualizations to further convey the information associated with your data exploration journey. Ensure that visualizations are appropriate for the data values you are plotting.
+
+
+## Conclusion
+
+### Reflection
+Student adequately summarizes the end-to-end problem solution and discusses one or two particular aspects of the project they found interesting or difficult.
+
+### Improvement
+Discussion is made as to how at least one aspect of the implementation could be improved. Potential solutions resulting from these improvements are considered and compared/contrasted to the current solution.
+
 
 ## Web Application
 I decided to build a web application instead of a blog post. I was inspired by the web application in the Disaster Response Pipeline project. I will provide the user with an input button to browse for an image that would be uploaded to the site. After upload, the neural network will be called with that provided image. The predicted breed will be fed back to the user through a flask jinja template.
