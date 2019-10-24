@@ -1,6 +1,6 @@
 # Udacity Data Scientist Nanodegree - Dog Breed Classifier
 
-## Project Overview:
+## Project Overview
 This is the dog breed classifier project. This project uses Convolutional Neural Networks (CNNs). In this project, I built a pipeline to process real-world, user-supplied images. Given an image of a dog, the algorithm will identify an estimate of the canine’s breed. If supplied an image of a human, the code will identify the resembling dog breed.
 
 ## Web Application
@@ -18,7 +18,7 @@ I ran into a few challenges trying to productionize the cnn into a flask applica
 
 The second issue I ran into was the flask site would freeze and crash when I ran the prediction method: inception_predict_breed(). Debugging this issue was nearly impossible because no proper and reasonable error was actually thrown. After some research online, I realized that flask must be run in a non-multi-threaded mode and this fixed the issue. This however, will limit the application to only one user at a time. 
 
-### Files:
+### Files
 * dog_app.ipynb
     * Jupyter notebook containing the code used to work through the project
 * dog.py
