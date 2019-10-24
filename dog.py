@@ -13,7 +13,7 @@ from keras.layers import Dropout
 from keras.applications.resnet50 import preprocess_input, decode_predictions
 
 # load list of dog names
-dog_names = [item[20:-1] for item in sorted(glob("data/dog_images/train/*/"))]
+dog_names = [item[26:-1] for item in sorted(glob("data/dog_images/train/*/"))]
 
 # define ResNet50 model
 ResNet50_model = ResNet50(weights='imagenet')
