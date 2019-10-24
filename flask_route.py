@@ -4,7 +4,7 @@ from werkzeug.utils import secure_filename
 from dog import inception_predict_breed, setup_cnn
 
 UPLOAD_FOLDER = 'uploaded_images'
-ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
+ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
